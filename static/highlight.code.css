@@ -1,0 +1,6 @@
+pre>code.hljs {
+    font-family: "Cascadia Code", "Fira Code", monospace;
+    width: fit-content;
+    padding: 20px 50px !important;
+    border-radius: 10px;
+}

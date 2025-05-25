@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}ChatBot - Ahihi{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link p-2 active" href="/">Hộp chat</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link p-2" href="/introduction">Giới thiệu</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Chat</h3>
+    </div>
+    <div class="card-body outline" id="chat-box" style="height: auto;">
+
+        <div class="user-box">
+            <div id="user-attchment">
+                <img src="https://placehold.co/600x200.png">
+                <!-- <audio controls
+                    src="https://diviextended.com/wp-content/uploads/2021/10/sound-of-waves-marine-drive-mumbai.mp3">
+                </audio> -->
+            </div>
+            <p class="p-3 text-tertiary" id="user-message">
+                ádfasdfkjhasdkfhalsdkfádfasdfkjhasdkfhalsdkfádfasdfkjhasdkfhalsdkfádfasdfkjhasdkfhalsdkf</p>
+        </div>
+
+        <div class="bot-box p-3">
+            <p class="m-0 text-tertiary" id="bot-message"></p>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br>
+
+<form id="form" class="fixed-bottom container mx-auto bg-body pb-3">
+    <div class="bd-input-compose  align-items-center p-3 container-sm">
+        <div class="userAttchment mx-2" id="user-attchment">
+            <img src="https://placehold.co/600x200.png">
+        </div>
+        <div class="d-flex">
+            <textarea class="form-control border-0 position-relative"
+                style="resize: none; background-color: transparent;" id="prompt-text" autofocus
+                placeholder="Đặt câu hỏi"></textarea>
+            <div class="btn-group dropup">
+                <span class="more-options-icon" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-plus text-body-secondary fs-3"></i>
+                </span>
+                <button class="btn border-0 p-0" type="submit" id="send-message">
+                    <span class="send-btn p-2"><i class="bi bi-send-fill text-body-secondary"></i></span>
+                </button>
+                <style>
+                    .dropdown-menu button:active {
+                        background-color: var(--bs-tertiary-bg) !important;
+                        color: var(--bs-secondary-color);
+                    }
+                </style>
+                <ul class="dropdown-menu dropdown-menu-lg-end bg-body-secondary">
+                    <li><button class="dropdown-item" type="button">Chọn tệp</button></li>
+                    <li><button class="dropdown-item" type="button">Ghi âm</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
