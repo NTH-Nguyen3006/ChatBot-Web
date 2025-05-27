@@ -1,4 +1,3 @@
-
 const checkElement = document.getElementById("check-5");
 document.getElementById("check-5").addEventListener("change", () => {
     let theme = (checkElement.checked) ? "light" : "dark";
@@ -22,9 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
 const prompt = document.getElementById("prompt-text");
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
+    console.log(prompt);
     if (prompt.value != "") {
         appendMessageBox(prompt.value, "user");
-        sendMessageReq(prompt.value, "")
+        sendMessageReq(prompt.value, "");
+        prompt.value = "";
     }
 });
 
@@ -44,26 +45,38 @@ prompt.addEventListener("input", (evt) => {
         sendMessageBtn.classList.add("show-send-btn");
 });
 
-appendUserMessageBox("ádbasdbaskdjkjdfhlakdjfhalkdsjfhaslkdfjh");
-
-// var divUserBox;
 function appendMessageBox(message, objectName = "user") {
     const divBox = document.createElement("div");
     const chatbox = document.getElementById("chat-box");
     divBox.className = `${objectName}-box p-3`;
-    divBox.innerHTML = `<p class="m-0 text-tertiary" id="${objectName}-message">${message}</p>`;
-    chatbox.appendChild(divUserBox);
+    if (objectName == "user")
+        divBox.innerHTML = `<p class="m-0 text-tertiary" id="user-message">
+            <span>${message}</span></p>`;
+    else {
+        // trường hợp là model
+        divBox.id = "bot-message";
+        // console.log(message);
+        // console.log(marked.parse(message));
+
+        divBox.innerHTML = marked.parse(message);
+    }
+    chatbox.appendChild(divBox);
     window.scrollTo(0, document.body.scrollHeight);
+    return divBox;
 }
 
-function writeText(textToWrite, elementAdopt, charIndex = 0) {
-    elementAdopt.innerHTML = marked.parse(textToWrite);
-    document.querySelectorAll("#bot-message>*").forEach((item, index) => {
-        console.log(item);
-        setTimeout(() => {
-            item.classList.add('visible');
-        }, index * 150);
-    });
+function botWriteText(textToWrite, elementAdopt) {
+    appendMessageBox(textToWrite, "model");
+    const bot_messages = document.querySelectorAll("#bot-message");
+    console.log();
+    Array.from(bot_messages[bot_messages.length - 1].children)
+        .forEach((item, index) => {
+            console.log("item: ", item);
+            setTimeout(() => {
+                item.classList.add('visible');
+                window.scrollTo(0, document.body.scrollHeight);
+            }, index * 150);
+        });
 }
 
 function sendMessageReq(userMessage, userAttachment) {
@@ -76,15 +89,18 @@ function sendMessageReq(userMessage, userAttachment) {
         body: formData
     }).then(res => { if (res.ok) return res.json() }
     ).then(data => {
-        if (data.message) {
-            appendMessageBox(data.message, "bot");
+        if (data.model) {
+            botWriteText(data.model)
+            appendMessageBox(marked.parse(data.model), "bot");
+            hljs.highlightAll();
         }
     });
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-const message = `Chào bạn! Tôi là một trợ lý ảo.
+const message = `
+Chào bạn! Tôi là một trợ lý ảo.
 Đây là một **tin nhắn mẫu** với _một vài_ định dạng.
 Bạn có thể thấy hiệu ứng gõ chữ của tôi.
 
@@ -100,4 +116,6 @@ public static void Main() {
 Cảm ơn bạn đã theo dõi!
 `;
 
-writeText(message, document.getElementById("bot-message"))
+botWriteText(message, null)
+botWriteText(message, null)
+

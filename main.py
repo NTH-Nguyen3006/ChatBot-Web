@@ -16,7 +16,25 @@ def introduction():
 def botController():
     
     
-    return jsonify()
+    return jsonify({
+        "model": r"""
+Chào bạn! Tôi là một trợ lý ảo.
+Đây là một **tin nhắn mẫu** với _một vài_ định dạng.
+Bạn có thể thấy hiệu ứng gõ chữ của tôi.
+
+`Đây là một đoạn code inline`
+
+Đây là một khối code:
+
+```CS
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+```
+
+Cảm ơn bạn đã theo dõi!
+"""
+    }), 200
 
 
 

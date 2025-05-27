@@ -176,8 +176,7 @@ form.show-send-btn .more-options-icon {
 }
 
 .user-box {
-    max-width: 80%;
-    width: fit-content;
+    /* width: fit-content; */
     margin-left: auto;
     margin-bottom: 10px;
     animation: slideUp .5s ease-out forwards;
@@ -187,9 +186,18 @@ form.show-send-btn .more-options-icon {
 }
 
 .user-box>p {
-    padding: 1em;
     background-color: var(--bs-secondary-bg);
     border-radius: 25px 5px 25px 25px;
+    max-width: 70%;
+}
+
+.user-box>p>span {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #user-attchment {

@@ -4,3 +4,7 @@ pre>code.hljs {
     padding: 20px 50px !important;
     border-radius: 10px;
 }
+
+pre {
+    border-radius: 10px;
+}
