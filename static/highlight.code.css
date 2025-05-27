@@ -4,6 +4,8 @@ pre {
     flex-direction: column;
     flex-wrap: wrap;
     align-content: space-between;
+    /* position: relative; */
+    max-width: 90%;
 }
 
 pre>nav.navbar {
@@ -11,18 +13,30 @@ pre>nav.navbar {
     background-color: #282a2c;
     color: #fff;
     border-radius: 10px 10px 0 0;
-    max-width: 100%;
+    position: sticky;
+    top: 0;
+    width: 100%;
 }
+
+/* pre>nav>.container {
+    position: sticky;
+    top: 100px;
+} */
 
 pre .bi {
     color: #fff;
 }
 
+pre>nav button {
+    margin-left: auto;
+    border: 0;
+}
+
 pre>code.hljs {
     font-family: "Cascadia Code", "Fira Code", monospace;
-    width: fit-content;
     padding: 20px 2.5em !important;
     border-radius: 0 0 10px 10px;
+    font-size: .875em;
 }
 
 pre>.navbar .btn {
@@ -32,10 +46,10 @@ pre>.navbar .btn {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    transition: ease .5s;
+    transition: ease .3s;
 }
 
 
 pre>.navbar .btn:hover {
-    background-color: #616263;
+    background-color: #474747;
 }

@@ -64,6 +64,7 @@ function appendMessageBox(message, objectName = "user") {
 
 function botWriteText(textToWrite) {
     appendMessageBox(textToWrite, "model");
+    addToolBarCodeBox(textToWrite);
     const bot_messages = document.querySelectorAll("#bot-message");
     Array.from(bot_messages[bot_messages.length - 1].children)
         .forEach((item, index) => {
@@ -91,8 +92,17 @@ function sendMessageReq(userMessage, userAttachment) {
     });
 }
 
-function addToolBarCodeBox() {
-    document.querySelector('code.hljs[data-highlighted="yes"]')
+// /```(?:\w+\s*)?([\s\S]*?)```/i
+
+function addToolBarCodeBox(message) {
+    const language = message.match(/[(\`)]\w.+/)[0].slice(1);
+    document.querySelectorAll("#bot-message pre").forEach(pre => {
+        pre.innerHTML += `<nav class="navbar"> 
+            <div class="container"> <span>${language}</span>
+                <button class="btn"><span><i class="bi bi-copy"></i></span></button>
+            </div></nav>`;
+        pre.insertBefore(pre.lastChild, pre.firstChild)
+    });
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -109,10 +119,46 @@ Bạn có thể thấy hiệu ứng gõ chữ của tôi.
 public static void Main() {
     Console.Writeline("Hello World!");
 }
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
+
+public static void Main() {
+    Console.Writeline("Hello World!");
+}
 \`\`\`
 
 Cảm ơn bạn đã theo dõi!
 `;
+
+// console.log(message.match(/```(?:\w+\s*)?([\s\S]*?)```/i)[1]);
+
 
 // botWriteText(message, null)
 botWriteText(message)

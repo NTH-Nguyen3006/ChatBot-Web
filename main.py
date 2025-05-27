@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from bot import *
+from app import *
 
 app = Flask(__name__)
 app.template_folder = "templates"
