@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+from bot import *
 
 app = Flask(__name__)
 app.template_folder = "templates"
@@ -17,23 +18,7 @@ def botController():
     
     
     return jsonify({
-        "model": r"""
-Chào bạn! Tôi là một trợ lý ảo.
-Đây là một **tin nhắn mẫu** với _một vài_ định dạng.
-Bạn có thể thấy hiệu ứng gõ chữ của tôi.
-
-`Đây là một đoạn code inline`
-
-Đây là một khối code:
-
-```CS
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-```
-
-Cảm ơn bạn đã theo dõi!
-"""
+        "model": r""""""
     }), 200
 
 

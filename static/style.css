@@ -176,7 +176,6 @@ form.show-send-btn .more-options-icon {
 }
 
 .user-box {
-    /* width: fit-content; */
     margin-left: auto;
     margin-bottom: 10px;
     animation: slideUp .5s ease-out forwards;

@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="card">
+<div class="card" style="margin-bottom: 100px;">
     <div class="card-header">
         <h3>Chat</h3>
     </div>
@@ -41,13 +41,30 @@
             </p>
         </div>
 
-        <div class="bot-box p-3">
-            <p class="m-0 text-tertiary" id="bot-message"></p>
+        <div class="model-box p-3" id="bot-message">
+            <p class="visible">Chào bạn! Tôi là một trợ lý ảo.
+                Đây là một <strong>tin nhắn mẫu</strong> với <em>một vài</em> định dạng.
+                Bạn có thể thấy hiệu ứng gõ chữ của tôi.</p>
+            <p class="visible"><code>Đây là một đoạn code inline</code></p>
+            <p class="visible">Đây là một khối code:</p>
+            <pre class="visible">
+            <nav class="navbar">
+                <div class="container">
+                    <span class="me-auto">C#</span>
+                    <button class="btn border-0"><span><i class="bi bi-copy"></i></span></button>
+                </div>
+            </nav>
+            <code class="language-CS hljs" data-highlighted="yes"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span> {
+    Console.Writeline(<span class="hljs-string">"Hello World!"</span>);
+}
+</code>        
+        </pre>
+            <p class="visible">Cảm ơn bạn đã theo dõi!</p>
         </div>
     </div>
 </div>
 
-<br><br><!-- <br><br><br> -->
+<!-- <section style="height: 110px;"></section> -->
 
 <form id="form" class="fixed-bottom container mx-auto bg-body pb-3">
     <div class="bd-input-compose  align-items-center p-3 container-sm">

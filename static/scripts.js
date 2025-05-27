@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const prompt = document.getElementById("prompt-text");
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log(prompt);
     if (prompt.value != "") {
         appendMessageBox(prompt.value, "user");
         sendMessageReq(prompt.value, "");
@@ -49,15 +48,13 @@ function appendMessageBox(message, objectName = "user") {
     const divBox = document.createElement("div");
     const chatbox = document.getElementById("chat-box");
     divBox.className = `${objectName}-box p-3`;
+
     if (objectName == "user")
-        divBox.innerHTML = `<p class="m-0 text-tertiary" id="user-message">
+        divBox.innerHTML = `<p class="p-3 text-tertiary" id="user-message">
             <span>${message}</span></p>`;
     else {
         // trường hợp là model
         divBox.id = "bot-message";
-        // console.log(message);
-        // console.log(marked.parse(message));
-
         divBox.innerHTML = marked.parse(message);
     }
     chatbox.appendChild(divBox);
@@ -65,16 +62,14 @@ function appendMessageBox(message, objectName = "user") {
     return divBox;
 }
 
-function botWriteText(textToWrite, elementAdopt) {
+function botWriteText(textToWrite) {
     appendMessageBox(textToWrite, "model");
     const bot_messages = document.querySelectorAll("#bot-message");
-    console.log();
     Array.from(bot_messages[bot_messages.length - 1].children)
         .forEach((item, index) => {
             console.log("item: ", item);
             setTimeout(() => {
                 item.classList.add('visible');
-                window.scrollTo(0, document.body.scrollHeight);
             }, index * 150);
         });
 }
@@ -91,10 +86,13 @@ function sendMessageReq(userMessage, userAttachment) {
     ).then(data => {
         if (data.model) {
             botWriteText(data.model)
-            appendMessageBox(marked.parse(data.model), "bot");
             hljs.highlightAll();
         }
     });
+}
+
+function addToolBarCodeBox() {
+    document.querySelector('code.hljs[data-highlighted="yes"]')
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -107,7 +105,7 @@ Bạn có thể thấy hiệu ứng gõ chữ của tôi.
 \`Đây là một đoạn code inline\`
 
 Đây là một khối code:
-\`\`\`C#
+\`\`\`CS
 public static void Main() {
     Console.Writeline("Hello World!");
 }
@@ -116,6 +114,6 @@ public static void Main() {
 Cảm ơn bạn đã theo dõi!
 `;
 
-botWriteText(message, null)
-botWriteText(message, null)
+// botWriteText(message, null)
+botWriteText(message)
 
