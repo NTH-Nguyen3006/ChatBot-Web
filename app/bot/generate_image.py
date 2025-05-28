@@ -4,13 +4,13 @@ from PIL import Image
 from io import BytesIO
 import base64
 
-def generateImage(promt):
+def generateImage(prompt):
     client = genai.Client(
         api_key="AIzaSyB6VIzIMt-Eax92Zt9GPQeiM0wE2KLo090"
     )
     response = client.models.generate_content(
         model="gemini-2.0-flash-preview-image-generation",
-        contents=promt,
+        contents=prompt,
         config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE']
         )
@@ -27,6 +27,7 @@ def generateImage(promt):
             print(base64.b64encode(part.inline_data.data))
             result["images"].append(base64.b64encode(part.inline_data.data))  
             image.save('gemini-native-image.png')
+            image.show()
 
     return result
 

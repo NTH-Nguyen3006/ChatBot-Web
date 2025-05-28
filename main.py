@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect
 from app import *
 
 app = Flask(__name__)
@@ -7,6 +7,7 @@ app.static_folder = "static"
 
 @app.route("/", methods = ["GET"])
 def home():
+    
     return render_template("home.html")
 
 @app.route("/introduction", methods = ["GET"])
