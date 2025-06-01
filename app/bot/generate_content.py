@@ -38,14 +38,10 @@ def generate_Content(promt:str):
             function_call = chunk.function_calls[0]
             callback_func(function_call.name, function_call.args)
             
-
-        print(chunk.model_dump_json())
-
-
-
+        print("Content: " ,chunk.candidates[0].content)
 
     return result_content
 
 if __name__ == "__main__":
     # generate_Content("Xin chào")
-    generate_Content("Hãy tạo cho tôi 1 bức ảnh mèo, yêu cầu hình ảnh phải chân thật")
+    generate_Content("Tạo cho tôi hình ảnh con mèo")

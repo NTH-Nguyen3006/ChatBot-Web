@@ -19,21 +19,4 @@ generate_image_declaration = {
 }   
 
 func_declarations = [generate_image_declaration]
-
-# Generation Config with Function Declaration
 _tools = types.Tool(function_declarations=func_declarations)
-config = types.GenerateContentConfig(tools=[_tools])
-
-# Define user prompt
-contents = [
-    types.Content(
-        role="user", parts=[types.Part(text="Tạo giúp cho tôi một bức ảnh con mèo")]
-    )
-]
-
-# Send request with function declarations
-# response = client.models.generate_content(
-#     model="gemini-2.0-flash", config=config, contents=contents
-# )
-
-# print(response.candidates[0].content.parts[0].function_call)

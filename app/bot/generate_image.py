@@ -16,20 +16,19 @@ def generateImage(prompt):
         )
     )
 
-    print(response.candidates[0].content.parts)
+    # print("Content: ", response.candidates[0])
     result = {"contents": [], 'images': []}
     for part in response.candidates[0].content.parts:
         if part.text is not None:
-            print(part.text)
             result["contents"].append(part.text)  
         elif part.inline_data is not None:
             image = Image.open(BytesIO((part.inline_data.data)))
-            print(base64.b64encode(part.inline_data.data))
+            # print(base64.b64encode(part.inline_data.data))
             result["images"].append(base64.b64encode(part.inline_data.data))  
             image.save('gemini-native-image.png')
             image.show()
 
-    return result
+    return response.candidates[0].content
 
 
 if __name__ == "__main__" :
