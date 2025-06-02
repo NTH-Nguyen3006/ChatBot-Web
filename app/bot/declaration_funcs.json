@@ -1,0 +1,40 @@
+{
+    "generate_image_declaration": {
+        "name": "generateImage",
+        "description": "Hàm tạo hình ảnh từ Gemini",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "prompt": {
+                    "type": "string",
+                    "description": "Tin nhắn từ người dùng yêu cầu tạo hình ảnh, hãy lấy đoạn text yêu cầu tạo ảnh từ người dùng và soạn cú pháp \"tạo hình ảnh <yêu cầu>\" rồi truyền vào hàm."
+                }
+            }
+        }
+    },
+    "send_mail_declaration": {
+        "name": "send_mail",
+        "description": "Hàm gửi Mail đến đối tượng lấy dữ liệu đầu vào",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "_from": {
+                    "type": "string",
+                    "description": "Mail từ máy chủ mặc định bạn hãy lấy nthn300607@gmail.com"
+                },
+                "to": {
+                    "type": "object",
+                    "description": "Danh sách chứa các tài khoản Gmail có thể nhận được Mail, nếu đầu vào có liệt kê ra thì bạn hãy đưa vào Array/List. Ví dụ: [example@gmail.com]"
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "Thiết lập TIÊU ĐỀ hộp thư (Mail). Bạn hãy kiểm tra đầu vào nếu tiêu đề thì bạn hãy lọc ra, nếu không có thì bạn hãy thiếp lập tiêu đề mặc định là \"NGƯỜI ẨN DANH ĐÃ GỬI MAIL ĐẾN BẠN\""
+                },
+                "content": {
+                    "type": "string",
+                    "description": "Nội dung của hộp thư. Bạn hãy lấy nội dung / văn bản đầu vào về thiết lập nó, phần này không bao gồm TIÊU ĐỀ và MAIL"
+                }
+            }
+        }
+    }
+}
