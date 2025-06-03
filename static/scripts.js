@@ -44,6 +44,18 @@ prompt.addEventListener("input", (evt) => {
         sendMessageBtn.classList.add("show-send-btn");
 });
 
+const copyBtns = document.querySelectorAll("#copy-code").forEach(btn => {
+    btn.addEventListener("click", function () {
+        console.log(this);
+
+        const preElement = this.parentElement.parentElement.parentElement;
+        const code_string = preElement.children.item(1).textContent;
+        navigator.clipboard.writeText(code_string)
+            .then(() => console.log('Text copied!'))
+            .catch(() => console.log("copy faild"))
+    });
+});
+
 function appendMessageBox(message, objectName = "user") {
     const divBox = document.createElement("div");
     const chatbox = document.getElementById("chat-box");
@@ -62,104 +74,64 @@ function appendMessageBox(message, objectName = "user") {
     return divBox;
 }
 
+function addToolBarCodeBox(title, element) {
+    element.innerHTML += `<nav class="navbar"> 
+            <div class="container"> <span>${title}</span>
+            <button class="btn" aria-label="Copy" id="copy-code">
+            <span><i class="bi bi-copy"></i></span></button></div></nav>`;
+    element.insertBefore(element.lastChild, element.firstChild);
+    const copy_btn = element.querySelector("#copy-code");
+    copy_btn.addEventListener("click", () => {
+        navigator.clipboard.writeText(element.lastChild.textContent)
+            .then(() => {
+                const copyIcon = copy_btn.cloneNode(true).innerHTML;
+                const copySuccess_btn = '<span><i class="bi bi-check-lg"></i></span>';
+                copy_btn.innerHTML = copySuccess_btn;
+                setTimeout(() => copy_btn.innerHTML = copyIcon, 2000);
+            });
+    });
+}
+
+function selectPreElement(parentElement) {
+    Array.from(parentElement.children).forEach((item) => {
+        if (item.tagName == "PRE") {
+            const firstChild = item.firstChild;
+            if (firstChild?.tagName == "CODE") {
+                console.log(firstChild.className);
+                let language = firstChild.className.match(/language-[\w#.+]+/)[0].slice(9);
+                language = (language == "undefined") ? "Kết quả" : language;
+                addToolBarCodeBox(language, item);
+            }
+        }
+        if (item.tagName == "UL" || item.tagName == "LI")
+            selectPreElement(item);
+    });
+}
+
 function botWriteText(textToWrite) {
-    appendMessageBox(textToWrite, "model");
-    addToolBarCodeBox(textToWrite);
-    const bot_messages = document.querySelectorAll("#bot-message");
-    Array.from(bot_messages[bot_messages.length - 1].children)
-        .forEach((item, index) => {
-            console.log("item: ", item);
-            setTimeout(() => {
-                item.classList.add('visible');
-            }, index * 150);
-        });
+    const divBotBox = appendMessageBox(textToWrite, "model");
+    hljs.highlightAll();
+    selectPreElement(divBotBox);
+    Array.from(divBotBox.children).forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add('visible');
+        }, index * 100);
+    });
 }
 
 function sendMessageReq(userMessage, userAttachment) {
-    const formData = new FormData();
-    formData.append("message", userMessage);
-    formData.append("attchment", userAttachment);
-
     fetch("/bot", {
         method: "POST",
-        body: formData
-    }).then(res => { if (res.ok) return res.json() }
-    ).then(data => {
-        if (data.model) {
-            botWriteText(data.model)
-            hljs.highlightAll();
-        }
-    });
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: userMessage, attchment: userAttachment })
+    }).then(res => { if (res.ok) return res.json() })
+        .then(data => {
+            if (data.model) {
+                botWriteText(data.model);
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        });
 }
-
-// /```(?:\w+\s*)?([\s\S]*?)```/i
-
-function addToolBarCodeBox(message) {
-    const language = message.match(/[(\`)]\w.+/)[0].slice(1);
-    document.querySelectorAll("#bot-message pre").forEach(pre => {
-        pre.innerHTML += `<nav class="navbar"> 
-            <div class="container"> <span>${language}</span>
-                <button class="btn"><span><i class="bi bi-copy"></i></span></button>
-            </div></nav>`;
-        pre.insertBefore(pre.lastChild, pre.firstChild)
-    });
-}
-
-const delay = ms => new Promise(res => setTimeout(res, ms));
-
-const message = `
-Chào bạn! Tôi là một trợ lý ảo.
-Đây là một **tin nhắn mẫu** với _một vài_ định dạng.
-Bạn có thể thấy hiệu ứng gõ chữ của tôi.
-
-\`Đây là một đoạn code inline\`
-
-Đây là một khối code:
-\`\`\`CS
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-
-public static void Main() {
-    Console.Writeline("Hello World!");
-}
-\`\`\`
-
-Cảm ơn bạn đã theo dõi!
-`;
-
-// console.log(message.match(/```(?:\w+\s*)?([\s\S]*?)```/i)[1]);
-
-
-// botWriteText(message, null)
-botWriteText(message)
-

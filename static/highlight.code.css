@@ -6,6 +6,8 @@ pre {
     align-content: space-between;
     /* position: relative; */
     max-width: 90%;
+    min-width: 40%;
+    width: fit-content;
 }
 
 pre>nav.navbar {
@@ -15,13 +17,9 @@ pre>nav.navbar {
     border-radius: 10px 10px 0 0;
     position: sticky;
     top: 0;
+    left: 0;
     width: 100%;
 }
-
-/* pre>nav>.container {
-    position: sticky;
-    top: 100px;
-} */
 
 pre .bi {
     color: #fff;
@@ -48,7 +46,6 @@ pre>.navbar .btn {
     justify-content: space-around;
     transition: ease .3s;
 }
-
 
 pre>.navbar .btn:hover {
     background-color: #474747;
