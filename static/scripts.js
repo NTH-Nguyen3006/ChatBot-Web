@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const prompt = document.getElementById("prompt-text");
+
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
     if (prompt.value != "") {
@@ -26,6 +27,7 @@ document.getElementById("form").addEventListener("submit", (e) => {
         sendMessageReq(prompt.value, "");
         prompt.value = "";
     }
+    sendMessageBtn.classList.remove("show-send-btn");
 });
 
 const sendMessageBtn = document.getElementById("form");
@@ -33,7 +35,6 @@ prompt.addEventListener("keydown", (evt) => {
     if ((evt.key === "Enter" || evt.keyCode === 13) && !evt.shiftKey) {
         evt.preventDefault();
         document.getElementById("send-message").click();
-        sendMessageBtn.classList.remove("show-send-btn");
     }
 });
 
