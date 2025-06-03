@@ -1,4 +1,5 @@
 from .generate_image import generateImage
+from . import *
 from ..services import *
 
 def callback_func(target: str, args: dict = None):
@@ -13,5 +14,6 @@ def callback_func(target: str, args: dict = None):
 
     result_set = {}
     call_function_str = f'result = {target}({", ".join(generate_arg_list)})'
+    print(call_function_str)
     exec(call_function_str, {f'{target}': eval(target)}, result_set)
     return result_set.get("result")

@@ -1,7 +1,7 @@
 {
     "generate_image_declaration": {
         "name": "generateImage",
-        "description": "Hàm tạo hình ảnh từ Gemini",
+        "description": "Hàm tạo hình ảnh từ Gemini, chỉ sử dụng khi đầu vào có liên quan",
         "parameters": {
             "type": "object",
             "properties": {
@@ -14,7 +14,7 @@
     },
     "send_mail_declaration": {
         "name": "send_mail",
-        "description": "Hàm gửi Mail đến đối tượng lấy dữ liệu đầu vào",
+        "description": "Hàm gửi Mail đến đối tượng lấy dữ liệu đầu vào, chỉ sử dụng khi đầu vào có liên quan",
         "parameters": {
             "type": "object",
             "properties": {
