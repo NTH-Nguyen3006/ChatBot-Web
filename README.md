@@ -1,4 +1,4 @@
-# CHATBOT - PYTHON WEB
+# CHATBOT - **PYTHON WEB**
 
 ## Mục Lục
 [Khởi chạy project](#cài-môi-trường-ảo-và-setup-thư-viện)
@@ -6,39 +6,40 @@
 [Khởi chạy project bằng Docker (nếu máy đã có docker)](#cài-môi-trường-ảo-và-setup-thư-viện)
 
 ### Cài môi trường ảo và setup thư viện 
-- `Lưu ý`: hãy trỏ `terminal/powershell` đúng thư mục của file main của dự án.
+`Lưu ý`: hãy trỏ `terminal/powershell` đúng thư mục của file main của dự án.
 
-* Cài môi trường ảo
+* **Cài môi trường ảo**
 ```powershell
 python -m venv .env
 ```
 
-* Active môi trường ảo
+* **Active môi trường ảo**
 ```powershell
 .env\Scripts\activate
 ```
 
-* Chạy lệnh cài toàn bộ thư viện cần thiết của dự án
+* **Chạy lệnh cài toàn bộ thư viện cần thiết của dự án**
 ```powershell
 pip install -r requirement.txt
 ```
 
-* Chạy dự án 
+* **Chạy dự án**
 ```
 python main.py
 ```
 
-Truy cập vào [localhost](localhost:80)
+Truy cập vào [localhost](http://localhost:80)
 
 ### Chạy dự án bằng Dockerfile
-- Build image
+Hãy đảm bảo rằng `terminal` đang trỏ cùng thư mục với `dockerfile`
+- **Build image**
 ```powershell
 docker build -t ahihi:v1 .
 ```
 
-- Khởi chạy container 
+- **Khởi chạy container**
 ```powershell
 docker-compose up -d
 ```
 
-Truy cập vào [localhost](localhost:80)
+Truy cập vào [localhost](http://localhost:80)
