@@ -3,7 +3,7 @@
 ## Mục Lục
 [Khởi chạy project](#cài-môi-trường-ảo-và-setup-thư-viện)
 
-[Khởi chạy project bằng Docker (nếu máy đã có docker)](#cài-môi-trường-ảo-và-setup-thư-viện)
+[Khởi chạy project bằng Docker (nếu máy đã có docker)](#chạy-dự-án-bằng-dockerfile)
 
 ### Cài môi trường ảo và setup thư viện 
 `Lưu ý`: hãy trỏ `terminal/powershell` đúng thư mục của file main của dự án.
