@@ -48,21 +48,39 @@ Truy cập vào [localhost](http://localhost:80)
 
 ### Thư Mục Dư Án
 ```
-📦app
- ┣ 📂bot
- ┃ ┣ 📜declaration_funcs.json
- ┃ ┣ 📜declaration_funcs.py
- ┃ ┣ 📜function_handler.py
- ┃ ┣ 📜generate_content.py
- ┃ ┣ 📜generate_history_chat.py
- ┃ ┣ 📜generate_image.py
- ┃ ┣ 📜generate_video.py
+📦fps_project
+ ┣ 📂app
+ ┃ ┣ 📂bot
+ ┃ ┃ ┣ 📜declaration_funcs.json
+ ┃ ┃ ┣ 📜declaration_funcs.py
+ ┃ ┃ ┣ 📜function_handler.py
+ ┃ ┃ ┣ 📜generate_content.py
+ ┃ ┃ ┣ 📜generate_history_chat.py
+ ┃ ┃ ┣ 📜generate_image.py
+ ┃ ┃ ┣ 📜generate_video.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂services
+ ┃ ┃ ┣ 📜send_mail.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📜models.py
  ┃ ┗ 📜__init__.py
- ┣ 📂services
- ┃ ┣ 📜send_mail.py
- ┃ ┗ 📜__init__.py
- ┣ 📜models.py
- ┗ 📜__init__.py
+ ┣ 📂static
+ ┃ ┣ 📂images
+ ┃ ┃ ┣ 📜ahihi-logo.png
+ ┃ ┃ ┣ 📜fps-logo.png
+ ┃ ┃ ┗ 📜image-removebg-preview.png
+ ┃ ┣ 📜highlight.code.css
+ ┃ ┣ 📜scripts.js
+ ┃ ┗ 📜style.css
+ ┣ 📂templates
+ ┃ ┣ 📜home.html
+ ┃ ┣ 📜introduction.html
+ ┃ ┗ 📜layout.html
+ ┣ 📜docker-compose.yml
+ ┣ 📜Dockerfile
+ ┣ 📜main.py
+ ┣ 📜requirement.txt
+ ┗ 📜setup.py
 ```
 
 ### Lưu ý
