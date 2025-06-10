@@ -46,6 +46,25 @@ docker-compose up -d
 
 Truy cập vào [localhost](http://localhost:80)
 
+### Thư Mục Dư Án
+```
+📦app
+ ┣ 📂bot
+ ┃ ┣ 📜declaration_funcs.json
+ ┃ ┣ 📜declaration_funcs.py
+ ┃ ┣ 📜function_handler.py
+ ┃ ┣ 📜generate_content.py
+ ┃ ┣ 📜generate_history_chat.py
+ ┃ ┣ 📜generate_image.py
+ ┃ ┣ 📜generate_video.py
+ ┃ ┗ 📜__init__.py
+ ┣ 📂services
+ ┃ ┣ 📜send_mail.py
+ ┃ ┗ 📜__init__.py
+ ┣ 📜models.py
+ ┗ 📜__init__.py
+```
+
 ### Lưu ý
 Hãy đảm bảo rằng dự án bạn phải thỏa những điều kiện sau:
 - Hãy trỏ `terminal/powershell` đúng thư mục của file main của dự án.
