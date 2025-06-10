@@ -3,10 +3,12 @@
 ## Mục Lục
 [Khởi chạy project](#cài-môi-trường-ảo-và-setup-thư-viện)
 
-[Khởi chạy project bằng Docker (nếu máy đã có docker)](#chạy-dự-án-bằng-dockerfile)
+[Khởi chạy project bằng `Docker` (nếu máy đã có docker)](#chạy-dự-án-bằng-dockerfile)
+
+[Lưu ý dự án cần](#lưu-ý)
 
 ### Cài môi trường ảo và setup thư viện 
-`Lưu ý`: hãy trỏ `terminal/powershell` đúng thư mục của file main của dự án.
+`Lưu ý`: 
 
 * **Cài môi trường ảo**
 ```powershell
@@ -43,3 +45,9 @@ docker-compose up -d
 ```
 
 Truy cập vào [localhost](http://localhost:80)
+
+### Lưu ý
+Hãy đảm bảo rằng dự án bạn phải thỏa những điều kiện sau:
+- Hãy trỏ `terminal/powershell` đúng thư mục của file main của dự án.
+- Cài đặt toàn bộ thư viện mà dự án cần ở file [thư viện cần của dự án](./requirement.txt)
+- Thiết lập các bộ phận cần thiết như (API keys, ...) tại file [setup.py](./setup.py)

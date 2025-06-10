@@ -9,10 +9,9 @@ from setup import *
 
 
 #retries = len(GEMINI_KEYS)-1
-def generate_Content(prompt:str, attchment=None) -> str:
+def generate_Content(prompt:str, attchment=None, retries = len(GEMINI_KEYS)-1) -> str:
     client = genai.Client(
-        # api_key=GEMINI_KEYS[retries],
-        api_key="AIzaSyB6VIzIMt-Eax92Zt9GPQeiM0wE2KLo090"
+        api_key=GEMINI_KEYS[retries],
     )
     model = "gemini-2.5-flash-preview-05-20" # Free: 10 RPM 500 req/day
 
@@ -59,7 +58,7 @@ Bắt đầu từ bây giờ, hãy là một trợ lý AI toàn diện và thôn
         contents=contents,
         config=generate_content_config,
     ):  
-        print("Content: " ,chunk)
+        # print("Content: " ,chunk)
         if chunk.text: result_content += chunk.text
         elif chunk.function_calls:
             try:
@@ -73,7 +72,7 @@ Bắt đầu từ bây giờ, hãy là một trợ lý AI toàn diện và thôn
             except:
                 generate_Content(prompt=prompt, attchment=attchment)
         
-    print(result_content)
+    # print(result_content)
 
     return result_content
 

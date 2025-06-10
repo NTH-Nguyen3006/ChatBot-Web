@@ -1,28 +1,30 @@
 from flask import Flask, request, jsonify, render_template, redirect
-from app import *
+from app import generate_Content
 
-app = Flask(__name__)
-app.template_folder = "templates"
-app.static_folder = "static"
+_app = Flask(__name__)
+_app.template_folder = "templates"
+_app.static_folder = "static"
 
-@app.route("/", methods = ["GET"])
+@_app.route("/", methods = ["GET"])
 def home():
-    
     return render_template("home.html")
 
-@app.route("/introduction", methods = ["GET"])
+@_app.route("/introduction", methods = ["GET"])
 def introduction():
     return render_template("introduction.html")
 
-@app.route("/bot", methods = ["POST"])
+@_app.route("/bot", methods = ["POST"])
 def botController():
-    
+    req: dict = request.get_json()
+    message = req.get("message", None)
+    attchment = req.get('attchment', None)
+    response = generate_Content(prompt=message, attchment=attchment)
     
     return jsonify({
-        "model": r""""""
+        "model": response
     }), 200
 
 
-
 if __name__ == "__main__":
-    app.run(host="localhost", port=8080, debug=True)
+    _app.run(host="localhost", port=8080, debug=True)
+    
