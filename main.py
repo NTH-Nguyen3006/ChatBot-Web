@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify, render_template, redirect
 from app import generate_Content
+import logging
 
 _app = Flask(__name__)
+_app.logger.setLevel(logging.INFO)
 _app.template_folder = "templates"
 _app.static_folder = "static"
 
@@ -18,8 +20,8 @@ def botController():
     req: dict = request.get_json()
     message = req.get("message", None)
     attchment = req.get('attchment', None)
-    response = generate_Content(prompt=message, attchment=attchment)
-    
+    response:str = generate_Content(prompt=message, attchment=attchment) or "Xảy ra lỗi"
+    _app.logger.info("Reply message")
     return jsonify({
         "model": response
     }), 200

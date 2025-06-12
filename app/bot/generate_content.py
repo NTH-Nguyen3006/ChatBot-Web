@@ -1,5 +1,4 @@
-import base64
-import os
+import base64, os, logging
 from google import genai
 from google.genai import types
 from .declaration_funcs import get_func_declaration_tool
@@ -67,16 +66,13 @@ Bắt đầu từ bây giờ, hãy là một trợ lý AI toàn diện và thôn
                 callback_func(function_call.name, function_call.args)
                 result_content = generate_Content(
                     f"""Bạn hãy tạo ra 1 câu phản hồi đã hoàn thành công việc với công việc có nội dung: {function_call.model_dump_json()}.
-                    Hãy tạo ra câu phản hồi mỗi lần khác nhau theo cách bạn sáng tạo tự nhiên nhất...""")
+                    Hãy tạo ra câu phản hồi mỗi lần khác nhau theo cách bạn sáng tạo tự nhiên và thông thái nhất...""")
                 # print("func call: ", result_content)
-            except:
-                generate_Content(prompt=prompt, attchment=attchment)
+            except Exception as e:
+                if (retries == -1): return "Đã xảy ra lỗi"
+                generate_Content(prompt=prompt, attchment=attchment, retries=retries-1)
         
-    # print(result_content)
-
     return result_content
-
-
 
 
 if __name__ == "__main__":

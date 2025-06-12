@@ -60,7 +60,7 @@ const copyBtns = document.querySelectorAll("#copy-code").forEach(btn => {
 function appendMessageBox(message, objectName = "user") {
     const divBox = document.createElement("div");
     const chatbox = document.getElementById("chat-box");
-    divBox.className = `${objectName}-box p-3`;
+    divBox.className = `${objectName}-box`;
 
     if (objectName == "user")
         divBox.innerHTML = `<p class="p-3 text-tertiary" id="user-message">

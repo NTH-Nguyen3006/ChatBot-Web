@@ -18,10 +18,6 @@
         "parameters": {
             "type": "object",
             "properties": {
-                "_from": {
-                    "type": "string",
-                    "description": "Mail từ máy chủ mặc định bạn hãy lấy nthn300607@gmail.com"
-                },
                 "to": {
                     "type": "object",
                     "description": "Danh sách chứa các tài khoản Gmail có thể nhận được Mail, nếu đầu vào có liệt kê ra thì bạn hãy đưa vào Array/List. Ví dụ: [example@gmail.com]"
@@ -32,7 +28,7 @@
                 },
                 "content": {
                     "type": "string",
-                    "description": "Nội dung của hộp thư. Bạn hãy lấy nội dung / văn bản đầu vào về thiết lập nó, phần này không bao gồm TIÊU ĐỀ và MAIL"
+                    "description": "Nội dung của hộp thư. Bạn hãy lấy nội dung / văn bản đầu vào về thiết lập nó, phần này không bao gồm TIÊU ĐỀ và MAIL. Nếu có markdown thì bạn hãy thêm markdown"
                 }
             }
         }
