@@ -211,18 +211,29 @@ form.show-send-btn .more-options-icon {
     text-overflow: ellipsis;
 }
 
-#user-attchment {
+#user-attchment,
+#bot-attchment {
     border-radius: 15px;
     margin-bottom: 5px;
 }
 
-#user-attchment>img {
+#user-attchment>img,
+#bot-attchment {
     object-fit: cover;
     width: 75px;
     height: 75px;
     border-radius: 15px;
     cursor: pointer;
     vertical-align: baseline;
+}
+
+#bot-attchment {
+    margin-top: 10px;
+    width: 30em;
+    height: 30em;
+    max-width: 20em;
+    max-height: 20em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .bot-box {

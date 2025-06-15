@@ -15,8 +15,9 @@ def callback_func(target: str, args: dict = None):
 
         result_set = {}
         call_function_str = f'result = {target}({", ".join(generate_arg_list)})'
-        print(call_function_str)
+        print("Call: ", call_function_str)
         exec(call_function_str, {f'{target}': eval(target)}, result_set)
         return result_set.get("result")
     except Exception as e:
+        print(e)
         raise e

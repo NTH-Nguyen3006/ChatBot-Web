@@ -69,6 +69,8 @@ function appendMessageBox(message, objectName = "user") {
         // trường hợp là model
         divBox.id = "bot-message";
         divBox.innerHTML = marked.parse(message);
+        if (divBox.querySelector("p>img"))
+            divBox.querySelector("p>img").id = "bot-attchment";
     }
     chatbox.appendChild(divBox);
     window.scrollTo(0, document.body.scrollHeight);
@@ -131,7 +133,11 @@ function sendMessageReq(userMessage, userAttachment) {
     }).then(res => { if (res.ok) return res.json() })
         .then(data => {
             if (data.model) {
-                botWriteText(data.model);
+                let model_message = data.model.message;
+                if (data.model.image)
+                    model_message += "\n\n" + `![](${data.model.image})`;
+
+                botWriteText(model_message);
                 window.scrollTo(0, document.body.scrollHeight);
             }
         });

@@ -16,7 +16,12 @@
     <div class="card-header">
         <h3>Chat</h3>
     </div>
-    <div class="card-body outline" id="chat-box" style="height: auto;"></div>
+    <div class="card-body outline" id="chat-box" style="height: auto;">
+        <!-- <div class="model-box" id="bot-message">
+            <p class="visible">Chào bạn! Tôi có thể giúp gì cho bạn?</p>
+        </div> -->
+
+    </div>
 </div>
 
 <form id="form" class="fixed-bottom mx-auto px-2 pb-3" style="background-color: var(--bs-body-bg);">
@@ -54,5 +59,24 @@
         </div>
     </div>
 </form>
+
+<!-- Vertically centered modal -->
+<div class="modal fade" id="img-modal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true"
+    role="dialog" style="backdrop-filter: blur(4px);">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <img class="" src="https://placehold.co/600x400" alt="">
+        </div>
+    </div>
+    <div class="position-absolute top-0 w-100 py-5 px-3">
+        <button class="btn border-0 ">
+            <span><i class="bi bi-download fs-3"></i></span>
+        </button>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#img-modal">
+    Launch static backdrop modal
+</button>
 
 {% endblock %}

@@ -8,7 +8,7 @@ from setup import *
 
 
 #retries = len(GEMINI_KEYS)-1
-def generate_Content(prompt:str, attchment=None, retries = len(GEMINI_KEYS)-1) -> str:
+def generate_Content(prompt:str, attchment=None, retries = len(GEMINI_KEYS)-1) -> dict:
     client = genai.Client(
         api_key=GEMINI_KEYS[retries],
     )
@@ -51,28 +51,35 @@ Bắt đầu từ bây giờ, hãy là một trợ lý AI toàn diện và thôn
         ),
     ]
 
-    result_content = ""
+    model_response = {"message": "", 'image': None}
     for chunk in client.models.generate_content_stream(
         model=model,
         contents=contents,
         config=generate_content_config,
     ):  
-        # print("Content: " ,chunk)
-        if chunk.text: result_content += chunk.text
+        print("Content: " ,chunk.text)
+        if chunk.text: model_response["message"] += chunk.text
         elif chunk.function_calls:
             try:
                 function_call = chunk.function_calls[0]
                 # print(function_call)
-                callback_func(function_call.name, function_call.args)
-                result_content = generate_Content(
-                    f"""Bạn hãy tạo ra 1 câu phản hồi đã hoàn thành công việc với công việc có nội dung: {function_call.model_dump_json()}.
-                    Hãy tạo ra câu phản hồi mỗi lần khác nhau theo cách bạn sáng tạo tự nhiên và thông thái nhất...""")
-                # print("func call: ", result_content)
+                response = callback_func(function_call.name, function_call.args)
+                print(response)
+                if response["content"]:
+                    model_response["message"] = response.get("content", "Tôi là AHIHI. Chatbot vạn năng")
+                if response["image"]:
+                    model_response["image"] = response.get("image", None)
+
+                # result_content = generate_Content(
+                #     f"""Bạn hãy tạo ra 1 câu phản hồi đã hoàn thành công việc với công việc có nội dung: {function_call.model_dump_json()}.
+                #     Hãy tạo ra câu phản hồi mỗi lần khác nhau theo cách bạn sáng tạo tự nhiên và thông thái nhất...""")
+                
             except Exception as e:
-                if (retries == -1): return "Đã xảy ra lỗi"
-                generate_Content(prompt=prompt, attchment=attchment, retries=retries-1)
+                print(e)
+                if (retries == -1): return "Đã xảy ra lỗi. Tôi là AHIHI. Chatbot vạn năng"
+                return generate_Content(prompt=prompt, attchment=attchment, retries=retries-1)
         
-    return result_content
+    return model_response
 
 
 if __name__ == "__main__":

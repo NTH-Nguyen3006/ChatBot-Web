@@ -32,5 +32,31 @@
                 }
             }
         }
+    },
+    "createQrCode": {
+        "name": "createQrCode",
+        "description": "Tạo QR Code khi có dữ liệu",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string",
+                    "description": "Đây là dữ liệu đầu vào và là data của QR Code sau khi quét"
+                }
+            }
+        }
+    },
+    "light_control": {
+        "name": "light_control",
+        "description": "Tắt/Mở đèn theo yêu cầu dữ liệu đầu vào nếu có yêu cầu khớp.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": "Đây là trạng thái đèn mà đầu vào yêu cầu (chỉ ràng buộc trong ON hay OFF), nếu là dữ liệu khác thì hãy truyền vào hàm là OFF"
+                }
+            }
+        }
     }
 }
