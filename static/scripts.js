@@ -57,11 +57,17 @@ const copyBtns = document.querySelectorAll("#copy-code").forEach(btn => {
     });
 });
 
+function addImageEvent(img) {
+    img.addEventListener("click", () => {
+        document.querySelector(".image-modal").setAttribute("src", img.src);
+        document.querySelector('button[data-bs-toggle="modal"]').click();
+    });
+}
+
 function appendMessageBox(message, objectName = "user") {
     const divBox = document.createElement("div");
     const chatbox = document.getElementById("chat-box");
     divBox.className = `${objectName}-box`;
-
     if (objectName == "user")
         divBox.innerHTML = `<p class="p-3 text-tertiary" id="user-message">
             <span>${message}</span></p>`;
@@ -69,8 +75,11 @@ function appendMessageBox(message, objectName = "user") {
         // trường hợp là model
         divBox.id = "bot-message";
         divBox.innerHTML = marked.parse(message);
-        if (divBox.querySelector("p>img"))
-            divBox.querySelector("p>img").id = "bot-attchment";
+        if (divBox.querySelector("p>img")) {
+            const imgEle = divBox.querySelector("p>img");
+            imgEle.id = "bot-attchment";
+            addImageEvent(imgEle);
+        }
     }
     chatbox.appendChild(divBox);
     window.scrollTo(0, document.body.scrollHeight);
@@ -142,3 +151,8 @@ function sendMessageReq(userMessage, userAttachment) {
             }
         });
 }
+
+//
+
+
+

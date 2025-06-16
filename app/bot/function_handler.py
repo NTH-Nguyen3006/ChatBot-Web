@@ -3,7 +3,7 @@ from . import *
 from ..services import *
 
 def callback_func(target: str, args: dict = None):    
-    try:    
+    try:
         generate_arg_list = []
         for arg, value in args.items():
             if isinstance(value, int): 

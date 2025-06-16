@@ -64,15 +64,10 @@ Bắt đầu từ bây giờ, hãy là một trợ lý AI toàn diện và thôn
                 function_call = chunk.function_calls[0]
                 # print(function_call)
                 response = callback_func(function_call.name, function_call.args)
-                print(response)
                 if response["content"]:
                     model_response["message"] = response.get("content", "Tôi là AHIHI. Chatbot vạn năng")
                 if response["image"]:
                     model_response["image"] = response.get("image", None)
-
-                # result_content = generate_Content(
-                #     f"""Bạn hãy tạo ra 1 câu phản hồi đã hoàn thành công việc với công việc có nội dung: {function_call.model_dump_json()}.
-                #     Hãy tạo ra câu phản hồi mỗi lần khác nhau theo cách bạn sáng tạo tự nhiên và thông thái nhất...""")
                 
             except Exception as e:
                 print(e)

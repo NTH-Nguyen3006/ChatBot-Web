@@ -23,8 +23,8 @@ def generateImage(prompt, retries=0):
                 image = Image.open(BytesIO((part.inline_data.data)))
                 result["image"] = "data:image/png;base64," + base64.b64encode(part.inline_data.data).decode() 
                 result['content'] += generate_Content("Cho tôi 1 câu phản hồi đã hoàn thành việc tạo ảnh. Kiểu tự nhiên và thông thái")["message"]
-                image.save('gemini-native-image.png')
-                image.show()
+                # image.save('gemini-native-image.png')
+                # image.show()
         return result
     except Exception as e:
         print("Lỗi tạo ảnh Gemini: ", e)

@@ -25,6 +25,26 @@
     }
 }
 
+html {
+    overflow-y: scroll;
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: var(--bs-secondary-color);
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
 
 .nav-item>.active {
     background-color: orangered;
@@ -249,4 +269,8 @@ form.show-send-btn .more-options-icon {
 #bot-message>.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.modal {
+    overflow: hidden;
 }
