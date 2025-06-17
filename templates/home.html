@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="card" style="margin-bottom: 100px;">
+<div class="card mx-auto" style="margin-bottom: 100px; max-width: 70em;">
     <div class="card-header">
         <h3>Chat</h3>
     </div>
@@ -20,14 +20,14 @@
         <!-- <div class="model-box" id="bot-message">
             <p class="visible">Chào bạn! Tôi có thể giúp gì cho bạn?</p>
         </div> -->
-
     </div>
 </div>
 
 <form id="form" class="fixed-bottom mx-auto px-2 pb-3" style="background-color: var(--bs-body-bg);">
-    <div class="bd-input-compose  align-items-center p-3 container-sm">
+    <div class="bd-input-compose align-items-center p-3 container-sm">
         <div class="userAttchment mx-2 d-none" id="user-attchment">
             <img src="https://placehold.co/600x200.png">
+
         </div>
         <div class="d-flex">
             <textarea class="form-control border-0 position-relative"
@@ -44,7 +44,6 @@
                         font-weight: 600 !important;
                     }
                 </style>
-
                 <span class="more-options-icon" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-plus text-body-secondary fs-3" style="font-weight: 700 !important;"></i>
                 </span>
@@ -52,7 +51,8 @@
                     <span class="send-btn p-2"><i class="bi bi-send-fill text-body-secondary"></i></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-lg-end bg-body-secondary">
-                    <li><button class="dropdown-item" type="button">Chọn tệp</button></li>
+                    <li><button class="dropdown-item" type="button" id="file-choosen" onclick="fileChooser()">Chọn
+                            tệp</button></li>
                     <li><button class="dropdown-item" type="button">Ghi âm</button></li>
                 </ul>
             </div>
@@ -60,23 +60,23 @@
     </div>
 </form>
 
-<!-- Vertically centered modal -->
 <div class="modal fade" id="img-modal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true"
-    role="dialog" style="backdrop-filter: blur(4px);">
-    <div class="modal-dialog modal-dialog-centered">
+    role="dialog" style="backdrop-filter: blur(18px);">
+    <div class="modal-dialog modal-dialog-centered container">
         <div class="modal-content">
-            <img class="" src="https://placehold.co/600x400" alt="">
+            <img class="image-modal rounded-4" src="https://placehold.co/600x400" alt="">
         </div>
     </div>
-    <div class="position-absolute top-0 w-100 py-5 px-3">
+    <div class="position-absolute top-0 w-100 py-5 px-3 d-flex">
         <button class="btn border-0 ">
             <span><i class="bi bi-download fs-3"></i></span>
+        </button>
+        <button class="btn border-0 ">
+            <span><i class="bi bi-x-lg fs-3"></i></span>
         </button>
     </div>
 </div>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#img-modal">
-    Launch static backdrop modal
-</button>
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#img-modal"></button>
 
 {% endblock %}

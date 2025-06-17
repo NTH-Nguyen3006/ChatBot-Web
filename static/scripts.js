@@ -19,12 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const prompt = document.getElementById("prompt-text");
-
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
     if (prompt.value != "") {
         appendMessageBox(prompt.value, "user");
         sendMessageReq(prompt.value, "");
+
         prompt.value = "";
     }
     sendMessageBtn.classList.remove("show-send-btn");
@@ -38,11 +38,15 @@ prompt.addEventListener("keydown", (evt) => {
     }
 });
 
-prompt.addEventListener("input", (evt) => {
+prompt.addEventListener("input", (evt) => { // Bắt sự kiện nhập phím
     if (evt.target.value == "")
         sendMessageBtn.classList.remove("show-send-btn");
     else
         sendMessageBtn.classList.add("show-send-btn");
+});
+
+prompt.addEventListener("paste", function (e) {
+
 });
 
 const copyBtns = document.querySelectorAll("#copy-code").forEach(btn => {
@@ -152,7 +156,53 @@ function sendMessageReq(userMessage, userAttachment) {
         });
 }
 
-//
+
+const mime_file_allow = [
+    "application/pdf",
+    "image/*",
+    "application/x-javascript",
+    "text/javascript",
+    "video/mp4",
+    "application/x-python",
+    "text/x-python",
+    "text/css",
+    "text/csv",
+    "text/html",
+    "text/plain",
+    "text/md"
+]
+const filesChoosen = [
+
+]
+function fileChooser() {
+    const inputFile = document.createElement("input");
+    inputFile.type = "file"
+    inputFile.accept = mime_file_allow.toString();
+    inputFile.click();
+    inputFile.onchange = (e) => {
+        const file_choosen = e.target.files[0];
+        console.log(file_choosen.type)
+        const fileReader = new FileReader();
+        fileReader.onload = (readerEvt) => {
+            const fileBase64 = readerEvt.target.result;
+            const userFileWriter = document.querySelector(".userAttchment>img");
+            console.log(userFileWriter.className)
+            if (!file_choosen.type.startsWith("image")) {
+                const mimeType = file_choosen.type;
+                const fileType = mimeType.slice(mimeType.indexOf("/") + 1);
+                userFileWriter.src = `/static/images/icons/${fileType}-file-icon.png`;
+            } else {
+                userFileWriter.src = fileBase64;
+            }
+            filesChoosen.push(fileBase64);
+            userFileWriter.parentElement.classList.remove("d-none");
+        }
+        fileReader.readAsDataURL(file_choosen, 'UTF-8');
+    };
+}
+
+
+
 
 
 

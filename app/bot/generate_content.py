@@ -57,7 +57,7 @@ Bắt đầu từ bây giờ, hãy là một trợ lý AI toàn diện và thôn
         contents=contents,
         config=generate_content_config,
     ):  
-        print("Content: " ,chunk.text)
+        # print("Content: " ,chunk.text)
         if chunk.text: model_response["message"] += chunk.text
         elif chunk.function_calls:
             try:
