@@ -237,6 +237,13 @@ form.show-send-btn .more-options-icon {
     margin-bottom: 5px;
 }
 
+.userAttchment>span {
+    width: 75px;
+    height: 75px;
+    display: block;
+    border-radius: 15px;
+}
+
 #user-attchment>img,
 #bot-attchment {
     object-fit: cover;

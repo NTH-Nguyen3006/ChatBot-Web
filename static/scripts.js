@@ -23,8 +23,8 @@ document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
     if (prompt.value != "") {
         appendMessageBox(prompt.value, "user");
-        sendMessageReq(prompt.value, "");
-
+        const userAttachment = filesChoosen == [] ? filesChoosen[0] : ''
+        sendMessageReq(prompt.value, userAttachment);
         prompt.value = "";
     }
     sendMessageBtn.classList.remove("show-send-btn");
@@ -171,9 +171,7 @@ const mime_file_allow = [
     "text/plain",
     "text/md"
 ]
-const filesChoosen = [
-
-]
+const filesChoosen = []
 function fileChooser() {
     const inputFile = document.createElement("input");
     inputFile.type = "file"
@@ -185,21 +183,24 @@ function fileChooser() {
         const fileReader = new FileReader();
         fileReader.onload = (readerEvt) => {
             const fileBase64 = readerEvt.target.result;
-            const userFileWriter = document.querySelector(".userAttchment>img");
+            const userFileWriter = document.querySelector(".userAttchment>span");
             console.log(userFileWriter.className)
             if (!file_choosen.type.startsWith("image")) {
                 const mimeType = file_choosen.type;
                 const fileType = mimeType.slice(mimeType.indexOf("/") + 1);
-                userFileWriter.src = `/static/images/icons/${fileType}-file-icon.png`;
+                userFileWriter.style.backgroundImage = `url(/static/images/icons/${fileType}-file-icon.png)`;
             } else {
-                userFileWriter.src = fileBase64;
+                userFileWriter.style.backgroundImage = `url(${fileBase64})`;
             }
+            filesChoosen.pop();
             filesChoosen.push(fileBase64);
             userFileWriter.parentElement.classList.remove("d-none");
         }
         fileReader.readAsDataURL(file_choosen, 'UTF-8');
     };
 }
+
+// document.getElementById("close-attchment").addEventListener()
 
 
 

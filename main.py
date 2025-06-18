@@ -20,8 +20,9 @@ def botController():
     req: dict = request.get_json()
     message = req.get("message", None)
     attchment = req.get('attchment', None)
-    response:str = generate_Content(prompt=message, attchment=attchment) or "Xảy ra lỗi"
-    _app.logger.info("Reply message")
+
+    response:str = generate_Content(prompt=message, attchment=attchment) or "Xảy ra lỗi. Tôi là AHIHI. Chatbot vạn năng"
+    _app.logger.info("model message")
     return jsonify({
         "model": response
     }), 200

@@ -2,7 +2,7 @@ import requests
 
 def light_control(status="off"):
     from ..bot import generate_Content
-    IP = "192.168.1.6"
+    IP = "192.168.1.3"
     requests.get(f"http://{IP}/{status.lower()}")
 
     return {
