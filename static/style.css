@@ -227,7 +227,7 @@ form.show-send-btn .more-options-icon {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     line-height: 1.8;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-overflow: ellipsis;
 }
 
@@ -237,7 +237,8 @@ form.show-send-btn .more-options-icon {
     margin-bottom: 5px;
 }
 
-.userAttchment>span {
+.userAttchment>span,
+.user-box .image {
     width: 75px;
     height: 75px;
     display: block;

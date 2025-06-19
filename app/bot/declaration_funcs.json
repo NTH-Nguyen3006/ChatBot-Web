@@ -1,13 +1,17 @@
 {
     "generate_image_declaration": {
         "name": "generateImage",
-        "description": "Hàm tạo hình ảnh từ Gemini, chỉ sử dụng khi đầu vào có liên quan",
+        "description": "Hàm tạo hình ảnh và tác động vào ảnh bằng Gemini, chỉ sử dụng khi đầu vào có liên quan",
         "parameters": {
             "type": "object",
             "properties": {
                 "prompt": {
                     "type": "string",
-                    "description": "Tin nhắn từ người dùng yêu cầu tạo hình ảnh, hãy lấy đoạn text yêu cầu tạo ảnh từ người dùng và soạn cú pháp \"tạo hình ảnh <yêu cầu>\" rồi truyền vào hàm."
+                    "description": "Đầu vào yêu tạo tạo hoặc chỉnh sửa hình ảnh. Hãy trích xuất text đầu vào và tạo lời nhắc tự nhiên và tinh tế nhất."
+                },
+                "attchment": {
+                    "type": "string",
+                    "description": "Nếu đầu vào có tệp là ảnh để chỉnh sửa thì hãy trích xuất và truyền vào đây bằng chuỗi base64. tham số này không bắt buộc"
                 }
             }
         }

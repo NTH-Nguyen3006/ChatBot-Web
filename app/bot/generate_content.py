@@ -12,12 +12,19 @@ def generate_Content(prompt:str, attchment=None, retries = len(GEMINI_KEYS)-1) -
     client = genai.Client(
         api_key=GEMINI_KEYS[retries],
     )
-    model = "gemini-2.5-flash-preview-05-20" # Free: 10 RPM 500 req/day
+    model = "gemini-2.5-flash" # Free: 10 RPM 500 req/day
 
     generate_content_config = types.GenerateContentConfig(
         response_mime_type="text/plain",
         tools=[get_func_declaration_tool()]
     )
+
+    parts = [ types.Part.from_text(text=prompt), ]
+    if attchment is not None:
+        parts.append(types.Part.from_bytes(
+            mime_type="image/jpeg", data=base64.b64decode(attchment)
+        ))
+
     contents = [
         types.Content(
             role="user",
@@ -45,9 +52,7 @@ Bắt đầu từ bây giờ, hãy là một trợ lý AI toàn diện và thôn
         ),
         types.Content(
             role="user",
-            parts=[
-                types.Part.from_text(text=prompt),
-            ],
+            parts=parts,
         ),
     ]
 

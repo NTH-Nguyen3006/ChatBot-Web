@@ -22,9 +22,17 @@ const prompt = document.getElementById("prompt-text");
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault();
     if (prompt.value != "") {
-        appendMessageBox(prompt.value, "user");
-        const userAttachment = filesChoosen == [] ? filesChoosen[0] : ''
-        sendMessageReq(prompt.value, userAttachment);
+        let userAttachment = filesChoosen[0];
+        appendMessageBox(prompt.value, "user", userAttachment);
+        closeFileChoosen();
+        if (userAttachment) {
+            if (userAttachment.startsWith("data:"))
+                userAttachment = userAttachment.split(",")[1];
+            sendMessageReq(prompt.value, userAttachment);
+        } else {
+            sendMessageReq(prompt.value);
+        }
+
         prompt.value = "";
     }
     sendMessageBtn.classList.remove("show-send-btn");
@@ -68,13 +76,23 @@ function addImageEvent(img) {
     });
 }
 
-function appendMessageBox(message, objectName = "user") {
+function appendMessageBox(message, objectName = "user", imageBase64 = null) {
     const divBox = document.createElement("div");
     const chatbox = document.getElementById("chat-box");
     divBox.className = `${objectName}-box`;
-    if (objectName == "user")
-        divBox.innerHTML = `<p class="p-3 text-tertiary" id="user-message">
+    if (objectName == "user") {
+        if (imageBase64) {
+            const spanImgElement = document.createElement('span');
+            spanImgElement.setAttribute("style", `background: url("${imageBase64}") 50% center / cover;`)
+            spanImgElement.className = "image mb-1";
+            spanImgElement.addEventListener("click", (e) => {
+                console.log(e.target);
+            });
+            divBox.appendChild(spanImgElement);
+        }
+        divBox.innerHTML += `<p class="p-3 text-tertiary" id="user-message">
             <span>${message}</span></p>`;
+    }
     else {
         // trường hợp là model
         divBox.id = "bot-message";
@@ -179,31 +197,35 @@ function fileChooser() {
     inputFile.click();
     inputFile.onchange = (e) => {
         const file_choosen = e.target.files[0];
-        console.log(file_choosen.type)
         const fileReader = new FileReader();
         fileReader.onload = (readerEvt) => {
             const fileBase64 = readerEvt.target.result;
             const userFileWriter = document.querySelector(".userAttchment>span");
-            console.log(userFileWriter.className)
-            if (!file_choosen.type.startsWith("image")) {
+            if (!file_choosen.type.startsWith("image")) { // nếu có kiểu là image
                 const mimeType = file_choosen.type;
                 const fileType = mimeType.slice(mimeType.indexOf("/") + 1);
                 userFileWriter.style.backgroundImage = `url(/static/images/icons/${fileType}-file-icon.png)`;
-            } else {
+            } else { // kiểu file
                 userFileWriter.style.backgroundImage = `url(${fileBase64})`;
             }
-            filesChoosen.pop();
-            filesChoosen.push(fileBase64);
+            filesChoosen.pop(); // tạm thời cho xóa r thay ảnh khác
+            filesChoosen.push(fileBase64); //add
+            userFileWriter.getElementsByTagName("button").item(0)
+                .onclick = (e) => closeFileChoosen(e.target)
             userFileWriter.parentElement.classList.remove("d-none");
         }
         fileReader.readAsDataURL(file_choosen, 'UTF-8');
     };
 }
 
-// document.getElementById("close-attchment").addEventListener()
-
-
-
-
+function closeFileChoosen(element = null) {
+    filesChoosen.length = 0 // clear cái mảng file
+    if (element) {
+        element.parentElement.style.backgroundImage = ""
+        document.querySelector(".userAttchment").classList.add('d-none');
+    } else {
+        closeFileChoosen(document.querySelector(".userAttchment>span>button"));
+    }
+}
 
 
